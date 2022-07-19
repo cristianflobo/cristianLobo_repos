@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const { Create, Delete, Get, Update, Simulacion, IdTribu, Archivo } = require('../controllers/controller');
+const { CreateAll } = require('../controllers/createAll');
+const router = (0, express_1.Router)();
+router.get("/", Get);
+router.get("/idtribu", IdTribu);
+router.get("/archivocsv/:id", Archivo);
+router.get("/simulacion", Simulacion);
+router.post("/create", Create);
+router.post("/createall", CreateAll);
+router.put("/update", Update);
+router.delete("/delete", Delete);
+module.exports = router;
