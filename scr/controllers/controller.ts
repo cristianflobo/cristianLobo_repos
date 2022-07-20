@@ -50,7 +50,9 @@ const Delete = async (req:any, res:any) => {
 
 const Get = async (_req:any, res:any) => {
     try {
-      let todos = await organizacion.findAll()
+      let todos = await organizacion.findAll({
+        include:tribu
+      })
       res.send(todos)
     } catch (error) {
        console.log(error)
@@ -93,7 +95,6 @@ const Update = async (req:any, res:any) => {
           605:"En espera",
           606:"aprobado",
         }
-    console.log(id)
     const findIdTribu = await tribu.findOne({
       where: { id_tribe: id },
     });
@@ -101,11 +102,12 @@ const Update = async (req:any, res:any) => {
       return res.send("La Tribu no se encuentra registrada")
     } 
     const cobertura = await repositorio.findAll({
-      where: {id_tribe: parseInt(id) },
+      where: {id_tribe: id},
     });
+    
     let valitCover = false
     if(cobertura){
-      await Promise.all( cobertura.map(async(item:any)=>{
+      await Promise.all(cobertura.map(async(item:any)=>{
         const metric = await metrics.findOne({
           where: {id_repository: item.id_repository },
         });
@@ -138,13 +140,16 @@ const Update = async (req:any, res:any) => {
         where: { id_tribe: id },
         include:metrics
       });
+      console.log("first")
       await Promise.all( findCoverage.map(async(item:any)=>{
         const stateItem:any =  {E:"Enable",D:"Disable",A:"Archive",}
         let year = item.create_time
         let yearInt = parseInt(JSON.stringify(year).slice(1,5))
         let state = item.state
         let verificationState = ""
+      
         if (yearInt === currentYear && state === "E" && item.dataValues.metric.dataValues.coverage > 75 ) {
+      
           const findTribu = await tribu.findOne({
             where: { id_tribe: item.dataValues.id_tribe },
           });
@@ -169,6 +174,7 @@ const Update = async (req:any, res:any) => {
           dataObjeto.verificationState = verificationState
           dataObjeto.state = stateItem[item.dataValues.state]
           dataResult.push(dataObjeto)
+          console.log("prueba",dataObjeto)
         }   
       }))
       res.send(dataResult)

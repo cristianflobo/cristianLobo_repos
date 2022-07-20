@@ -2,7 +2,16 @@
 Para iniciar el proyecto se ejecuta el siguiente comando: npm run dev                                           
 -----------------------------------------------------------------------------------------------------------------------
 Para ejecutar la pruebas unitarias se ejecuta el siguiente comando: npm test test.js previamente ejecutado el proyecto
+en algunos text se pone una x delante para que no los ejecute ejemplo:  xit('Modificar organizacion', done => {
 -----------------------------------------------------------------------------------------------------------------------
+en la carpeta src/ el archivo index.ts se puede forzar a reiniciar la base de datos
+        app.listen(3001,() =>{
+            console.log("server on port 3001")
+            db.sync({force:false});                   //pones la variable force:true
+        })
+------------------------------------------------------------------------------------------------------------------------
+El archivo que se crea en el punto 4 se llama tribu.csv
+------------------------------------------------------------------------------------------------------------------------
 
 SIMULACION PUNTO 1 MOCK
      GET - http://localhost:3001/simulacion    
@@ -39,6 +48,7 @@ ELIMINAR ORGANIZACION
         name = nombre de la organizacion    
 
 --------------------------------------------------------------------------------------------
+Las busquedad son con el id de la tribu
 EJERCICIO 3
     Escenario 1: Obtener métricas de repositorios por tribu:
         Dado: que envío el identificador de una tribu
@@ -55,7 +65,7 @@ EJERCICIO 3
         Cuando consumo el servicio para obtener los repositorios y la tribu no existe
         Entonces me retornará el siguiente error: 'La Tribu no se encuentra registrada
         
-        http://localhost:3001/idtribu/?metric=4
+        GET http://localhost:3001/idtribu/?metric=4
 
     --------------------------------------------------------------------------------------------
     Escenario 3: Información de verificación.
@@ -75,7 +85,7 @@ EJERCICIO 3
         Entonces me retornará el siguiente error: 'La Tribu no tiene repositorios que cumplan con la 
         cobertura necesaria'
 
-        http://localhost:3001/idtribu/?metric=2 
+        GET http://localhost:3001/idtribu/?metric=2 
         
 --------------------------------------------------------------------------------------------
 EJERCICIO 4
@@ -85,5 +95,26 @@ EJERCICIO 4
         Entonces me retornará un archivo .csv con el detalle de la consulta elaborada en el ejercicio 
         número 3, donde cada atributo se representa como una columna.
 
-        http://localhost:3001/archivocsv/2
+        GET http://localhost:3001/archivocsv/2
 --------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------
+Con esta ruta se puede crear unos ejemplos 
+        GET http://localhost:3001/createall
+        body
+        { 
+            "nameOr": "Banco Pichincha",
+            "nameTr": "Centro Digital",
+            "nameRe": "cd-common-text",
+            "state":"E",
+            "statusOr":"1",
+            "statusTr": "1",
+            "statusRe":"I",
+            "create_time":"2022",
+            "coverage":"80",
+            "bugs":"0",
+            "vulnerabilities":"2",
+            "code_smells":"0",
+            "hostpots":"0"
+            
+        }

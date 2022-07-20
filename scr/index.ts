@@ -9,7 +9,7 @@ app.use(express.json())
 app.use("/",rutas)
 app.listen(3001,() =>{
     console.log("server on port 3001")
-    db.sync({force:true}); 
+    db.sync({force:false}); 
 })
 
 
