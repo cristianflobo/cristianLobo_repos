@@ -9,8 +9,9 @@ app.use(express.json())
 app.use("/",rutas)
 app.listen(3001,() =>{
     console.log("server on port 3001")
-    db.sync({force:false}); 
+    db.sync({force:true}); 
 })
 
 
 exports.module = app;
+

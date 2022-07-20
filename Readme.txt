@@ -1,3 +1,9 @@
+-----------------------------------------------------------------------------------------------------------------------
+Para iniciar el proyecto se ejecuta el siguiente comando: npm run dev                                           
+-----------------------------------------------------------------------------------------------------------------------
+Para ejecutar la pruebas unitarias se ejecuta el siguiente comando: npm test test.js previamente ejecutado el proyecto
+-----------------------------------------------------------------------------------------------------------------------
+
 SIMULACION PUNTO 1 MOCK
      GET - http://localhost:3001/simulacion    
         {
@@ -59,7 +65,7 @@ EJERCICIO 3
         Entonces me retornará una etiqueta en la respuesta indicando un texto en lenguaje natural del 
         estado de verificación actual de cada repositorio
 
-        -no entendi muy bien si me explican la puedo crear
+        -no entendi muy bien lo hice de acuerdo a como lo entendi
 
     --------------------------------------------------------------------------------------------
     Escenario 4: Tribu no tiene repositorios que cumplan con la cobertura.

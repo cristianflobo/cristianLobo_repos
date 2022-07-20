@@ -3,9 +3,6 @@ const {organizacion,metrics,tribu,repositorio} = require('../db')
 const ObjectsToCsv = require('objects-to-csv')
 const axios = require('axios')
 
-
-
-
 interface dataObjeto{
 	id:number,
   name:string,
@@ -19,7 +16,6 @@ interface dataObjeto{
   verificationState:string,
   state:string,
 }
-
 
 const Create = async (req:any, res:any) => {
   const {name,status} = req.body
